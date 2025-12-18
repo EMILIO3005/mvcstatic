@@ -11,7 +11,6 @@ class Producto extends Conexion{
   private $pdo;
 
   //Constructor
-
   public function __construct(){
     //La conexion asigna el acceso a $this->pdo
     $this->pdo = parent::getConexion();
@@ -21,7 +20,12 @@ class Producto extends Conexion{
   public function listar(){
     try{
       //1. Crear la consulta sql
-      $sql = "SELECT * FROM productos";
+      $sql = "
+      SELECT 
+      id, clasificacion, marca, descripcion, garantia, ingreso, cantidad 
+      FROM productos
+      ORDER BY id DESC
+";
       //2. Enviar la consulta preparada a PDO
       $consulta = $this->pdo->prepare($sql);
 
@@ -38,8 +42,34 @@ class Producto extends Conexion{
     }
   }
 
-  public function registrar(){
+  public function registrar($registro = []): int{
+    try{
+      $sql = "
+      INSERT INTO productos
+        (clasificacion, marca, descripcion, garantia, ingreso, cantidad) VALUES
+        (?,?,?,?,?,?)
+        ";
 
+        $consulta = $this->pdo->prepare($sql);
+
+        //La consulta, lleva comodines, pasamos los datos en execute()
+        $consulta->execute(
+          array(
+            $registro['clasificacion'],
+            $registro['marca'],
+            $registro['descripcion'],
+            $registro['garantia'],
+            $registro['ingreso'],
+            $registro['cantidad']
+          )
+          );
+
+          //Retornar la PK (Primary key) generado
+          return $this->pdo->lastInsertId();
+
+    }catch(Exception $e){
+      return -1;
+    }
 
   }
 

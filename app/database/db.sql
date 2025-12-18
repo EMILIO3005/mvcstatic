@@ -17,7 +17,12 @@ CREATE TABLE productos
 
 INSERT INTO productos
 (clasificacion, marca, descripcion, garantia, ingreso, cantidad) VALUES
-('Equipo', 'Epson', 'Impresora L200', 24, '20025-10-05', 10),
-('Accesorio', 'Logitech', 'Teclado USB negro', 12, '20025-11-01', 20),
-('Consumible', 'Canon', 'Pixma 190 Yellow', 6, '20025-09-10', 5);
-SELECT *FROM productos;
+('Equipo', 'Epson', 'Impresora L200', 24, '2025-10-05', 10),
+('Accesorio', 'Logitech', 'Teclado USB negro', 12, '2025-11-01', 20),
+('Consumible', 'Canon', 'Pixma 190 Yellow', 6, '2025-09-10', 5);
+SELECT * FROM productos;
+
+SELECT 
+id, clasificacion, marca, descripcion, garantia, ingreso, cantidad 
+FROM productos
+ORDER BY id DESC;
