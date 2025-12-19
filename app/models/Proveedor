@@ -18,19 +18,114 @@ class Proveedor extends Conexion{
   }
 
   public function listar(){
-    $this->pdo;
+    
+    try{
+      $sql = "
+      SELECT 
+      id, razonSocial, ruc, telefono, origen, contacto, confianza
+      FROM proveedor
+      ORDER BY id DESC
+      ";
+
+      $consulta = $this->pdo->prepare($sql);
+      //Ejecutar la consulta
+
+      $consulta->execute();
+
+      // Entregar resultado
+      return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch (Exception $e){
+      return [];
+    }
   }
 
-  public function registrar(){
-    $this->pdo;
+  public function registrar($registro = []):int{
+    try{
+      $sql = "
+      INSERT INTO proveedor
+        (razonSocial, ruc, telefono, origen, contacto, confianza) VALUES
+        (?,?,?,?,?,?)
+        ";
+
+        $consulta = $this->pdo->prepare($sql);
+
+        //La consulta, lleva comodines, pasamos los datos en execute()
+        $consulta->execute(
+          array(
+            $registro['razonSocial'],
+            $registro['ruc'],
+            $registro['telefono'],
+            $registro['origen'],
+            $registro['contacto'],
+            $registro['confianza']
+          )
+          );
+
+          //Retornar la PK (Primary key) generado
+          return $this->pdo->lastInsertId();
+
+    }catch(Exception $e){
+      return -1;
+    }
   }
 
-  public function actualizar(){
-    $this->pdo;
+  public function actualizar($registro = []): int{
+    try{
+      $sql = "
+      UPDATE proveedor SET
+        clasificacion = ?,
+        marca = ?,
+        descripcion = ?,
+        garantia = ?,
+        ingreso = ?,
+        cantidad = ?,
+        updated = now()
+      WHERE id = ?
+        ";
+
+        $consulta = $this->pdo->prepare($sql);
+
+        //La consulta, lleva comodines, pasamos los datos en execute()
+        $consulta->execute(
+          array(
+            $registro['clasificacion'],
+            $registro['marca'],
+            $registro['descripcion'],
+            $registro['garantia'],
+            $registro['ingreso'],
+            $registro['cantidad'],
+            $registro['id']
+          )
+          );
+
+          //Retornar la PK (Primary key) generado
+          return $consulta->rowCount();
+
+    }catch(Exception $e){
+      return -1;
+    }
+    
   }
 
-  public function eliminar(){
-    $this->pdo;
+  public function eliminar($id): int{
+    try{
+      $sql = "DELETE FROM proveedor WHERE   id = ?";
+      $consulta = $this->pdo->prepare($sql);
+
+      //El execute() esta vacio cuando NO utilizas comodines
+      $consulta->execute(
+        array($id)
+      );
+
+      //¿que debemos devolver?
+      //Retorna la cantidad de filas afectadas
+      return $consulta->rowCount();
+    }
+    catch(Exception $e){
+      return -1;
+    }
+    
   }
 
 }

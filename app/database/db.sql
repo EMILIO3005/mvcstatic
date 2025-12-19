@@ -15,12 +15,32 @@ CREATE TABLE productos
   updated       DATETIME         NULL COMMENT 'Se agrega al detectar un cambio'
 )ENGINE = INNODB; 
 
+
+CREATE TABLE proveedores(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  razonSocial       VARCHAR(150) NOT NULL,
+  ruc               CHAR(11) NULL,
+  telefono          CHAR(9) null,
+  origen            ENUM('N', 'E')  DEFAULT 'N',
+  contacto          VARCHAR(50) NOT NULL,
+  confianza         TINYINT NOT NULL DEFAULT 1,
+  created       DATETIME         NOT NULL DEFAULT NOW() COMMENT 'Campo calculado fecha y hora',
+  updated       DATETIME         NULL COMMENT 'Se agrega al detectar un cambio'
+
+)ENGINE = INNODB;
+
 INSERT INTO productos
 (clasificacion, marca, descripcion, garantia, ingreso, cantidad) VALUES
 ('Equipo', 'Epson', 'Impresora L200', 24, '2025-10-05', 10),
 ('Accesorio', 'Logitech', 'Teclado USB negro', 12, '2025-11-01', 20),
 ('Consumible', 'Canon', 'Pixma 190 Yellow', 6, '2025-09-10', 5);
-SELECT * FROM productos;
+
+
+INSERT INTO proveedores 
+(razonSocial, ruc, telefono, origen, contacto, confianza) VALUES
+('Magic Technologies E.I.R.L.', '', '983727426', 'N', 'magictecnologi@gmail.com', 2)
+
+SELECT * FROM proveedores;
 
 SELECT 
 id, clasificacion, marca, descripcion, garantia, ingreso, cantidad 

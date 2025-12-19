@@ -1,0 +1,14 @@
+{
+  "apellidos": "CUEVA ROJAS",
+  "nombres": "Emilio Jose",
+  "lenguajes": ["HTML","CSS","PYTHON"],
+  "AMIGOS": ["Sergio", "carlos", "josue"],
+  "edad": 20,
+  "estatura": 1.70,
+  "formacion": {
+    "inicial": ["Las abejitas"],
+    "primaria": ["IE los devs", "IE Avengers"],
+    "secundaria": ["IE JPB"],
+    "carrera": ["SENATI", "", ""]
+  }
+}

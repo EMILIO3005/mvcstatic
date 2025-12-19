@@ -4,8 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Productos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 </head>
 <body>
-  <h1>Listar productos activos</h1>
+  
+  <div class="container">
+    <h1>Lista de productos</h1>
+    <a href="#" class="btn btn-sm btn-primary">Registrar</a>
+    <hr>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Clasificacion</th>
+          <th>Descripcion</th>
+          <th>Garantia</th>
+          <th>Ingreso</th>
+          <th>Cantidad</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+       
+      </tbody>
+    </table>
+  </div>
+  <script>
+    //vERIFICAR QUE TODA LA PGINA ESTE CARGADA(LISTA)
+    document.addEventListener("DOMContentLoaded", function(){
+      console.log("Página lista")
+    })
+  </script>
 </body>
 </html>
