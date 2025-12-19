@@ -73,12 +73,60 @@ class Producto extends Conexion{
 
   }
 
-  public function eliminar(){
+  public function eliminar($id): int{
+    try{
+      $sql = "DELETE FROM productos WHERE   id = ?";
+      $consulta = $this->pdo->prepare($sql);
 
+      //El execute() esta vacio cuando NO utilizas comodines
+      $consulta->execute(
+        array($id)
+      );
+
+      //¿que debemos devolver?
+      //Retorna la cantidad de filas afectadas
+      return $consulta->rowCount();
+    }
+    catch(Exception $e){
+      return -1;
+    }
   }
 
-  public function actualizar(){
+  public function actualizar($registro = []): int{
+    try{
+      $sql = "
+      UPDATE productos SET
+        clasificacion = ?,
+        marca = ?,
+        descripcion = ?,
+        garantia = ?,
+        ingreso = ?,
+        cantidad = ?,
+        updated = now()
+      WHERE id = ?
+        ";
 
+        $consulta = $this->pdo->prepare($sql);
+
+        //La consulta, lleva comodines, pasamos los datos en execute()
+        $consulta->execute(
+          array(
+            $registro['clasificacion'],
+            $registro['marca'],
+            $registro['descripcion'],
+            $registro['garantia'],
+            $registro['ingreso'],
+            $registro['cantidad'],
+            $registro['id']
+          )
+          );
+
+          //Retornar la PK (Primary key) generado
+          return $consulta->rowCount();
+
+    }catch(Exception $e){
+      return -1;
+    }
   }
 
   public function buscar(){

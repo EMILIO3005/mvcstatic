@@ -13,7 +13,7 @@ CREATE TABLE productos
   cantidad      INT              NOT NULL,
   created       DATETIME         NOT NULL DEFAULT NOW() COMMENT 'Campo calculado fecha y hora',
   updated       DATETIME         NULL COMMENT 'Se agrega al detectar un cambio'
-)ENGINE = INNODB;
+)ENGINE = INNODB; 
 
 INSERT INTO productos
 (clasificacion, marca, descripcion, garantia, ingreso, cantidad) VALUES

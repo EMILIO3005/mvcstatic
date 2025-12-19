@@ -1,6 +1,36 @@
 <?php
 
+//1. Acceder a la clase conexion
 require_once 'Conexion.php';
+
+
+//2. El proveedor heredara las funcionalidades de la clase Conexion
 class Proveedor extends Conexion{
+
+  //3. Creamos un atributo donde guardamos la conexion
+  private $pdo;
+
+  //4. En el constructor, guardamos la conexion activa
+
+  public function __construct(){
+    $this->pdo = parent::getConexion();
+
+  }
+
+  public function listar(){
+    $this->pdo;
+  }
+
+  public function registrar(){
+    $this->pdo;
+  }
+
+  public function actualizar(){
+    $this->pdo;
+  }
+
+  public function eliminar(){
+    $this->pdo;
+  }
 
 }

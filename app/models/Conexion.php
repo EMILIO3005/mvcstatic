@@ -16,7 +16,7 @@ class Conexion{
   //Metodo
   public function getConexion(){
     //try catch = manejador de excepciones
-    //try (intentar)
+    //try   (intentar)
     //catch (accidente, error)
     try{
       //La clase PDO permite connectarse a defirentes motores de BD,

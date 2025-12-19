@@ -7,10 +7,11 @@ $producto = new Producto();
 
 $datos = [
   "clasificacion" => "Equipo",
-  "marca" => "Lenovo",
-  "descripcion" => "Intel Core i7",
-  "garantia" => 12,
-  "ingreso" => "2025-05-12",
-  "cantidad" => 10
+  "marca" => "Samsung",
+  "descripcion" => "Tablet 12 pulgadas",
+  "garantia" => 36,
+  "ingreso" => "2025-01-01",
+  "cantidad" => 3,
+  "id"       => 1
 ];
-print_r($producto->registrar($datos));
+print_r($producto->actualizar($datos));
