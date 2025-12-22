@@ -17,16 +17,27 @@ $producto = new Producto();
 //JSON      :JavaScrip object Notation
 //Mecanismo de intercambio de datos
 
-if (isset($_POST['operacion'])){
+if (isset($_POST['operacion'])) {
 
   //El usuario me envio una tarea...
-  switch ($_POST['operacion']){
-    case 'lista':
+  switch ($_POST['operacion']) {
+    case 'listar':
       $registros = $producto->listar();
       echo json_encode($registros);
       //Algoritmo..
       break;
     case 'registrar':
+      $datos = [
+        "clasificacion" => $_POST['clasificacion'],
+        "marca" => $_POST['marca'],
+        "descripcion" => $_POST['descripcion'],
+        "garantia" => $_POST['garantia'],
+        "ingreso" => $_POST['ingreso'],
+        "cantidad" => $_POST['cantidad'],
+        
+      ];
+      $idobtenido = $producto->registrar($datos);
+      echo json_encode(["id" => $idobtenido]);
       //Algoritmo..
       break;
     case 'actualizar':

@@ -10,10 +10,10 @@
   
   <div class="container">
     <h1>Lista de productos</h1>
-    <a href="#" class="btn btn-sm btn-primary">Registrar</a>
+    <a href="./crear.php" class="btn btn-sm btn-primary">Registrar</a>
     <hr>
 
-    <table class="table table-striped">
+    <table class="table table-striped" id="tabla-productos">
       <thead>
         <tr>
           <th>ID</th>
@@ -32,9 +32,48 @@
     </table>
   </div>
   <script>
-    //vERIFICAR QUE TODA LA PGINA ESTE CARGADA(LISTA)
+    //Metodo  : Accion
+    //Atribito  : Caracteristica, Propiedad
+    //Evento   : Respuesta
+    //VERIFICAR QUE TODA LA PGINA ESTE CARGADA(LISTA)
     document.addEventListener("DOMContentLoaded", function(){
-      console.log("Página lista")
+      //Enviarle una solicitud al controlador y esperar una respuesta
+      function obtenerDatos(){
+        const datos = new FormData()
+        datos.append("operacion", "listar")
+ 
+        //¿Qué es una promesa?
+        //Conceptos ligados a procesos asíncronos, donde una tarea
+        //puede ser resuelta en N tiempo o bien puede fallar
+        fetch('../../app/controllers/producto.controller.php', {
+          method: 'POST',
+          body: datos
+        })
+        .then(response => response.json())
+        .then(data => {
+          //console.log(data) //Todos los datos en un paquete
+         
+          const tabla = document.querySelector("#tabla-productos tbody")
+ 
+          //Renderizar las filas en <table>
+          data.forEach(element => {
+            tabla.innerHTML += `
+            <tr>
+              <td>${element.id}</td>
+              <td>${element.clasificacion}</td>
+              <td>${element.marca}</td>
+              <td>${element.descripcion}</td>
+              <td>${element.garantia}</td>
+              <td>${element.ingreso}</td>
+              <td>${element.cantidad}</td>
+              <td></td>
+            </tr>
+            `;
+          });
+        })
+
+      }
+      obtenerDatos()
     })
   </script>
 </body>
